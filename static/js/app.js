@@ -76,7 +76,7 @@ const updateSensorGauges = (sensorId, data) => {
 // Update all sensors data
 const updateAllSensorsData = () => {
     ['n2', 'n3', 'n4'].forEach(sensorId => {
-        database.ref(`/sensors/${sensorId}`).once('value', (snapshot) => {
+        database.ref(`/data/${sensorId}`).once('value', (snapshot) => {
             const data = snapshot.val();
             if (data) {
                 updateSensorGauges(sensorId, data);
@@ -213,7 +213,7 @@ const connectToSensor = (sensorId) => {
         connectionRef.off();
     }
 
-    connectionRef = database.ref(`/sensors/${sensorId}`);
+    connectionRef = database.ref(`/data/${sensorId}`);
     connectionRef.on('value', (snapshot) => {
         hideLoading();
         const data = snapshot.val();
